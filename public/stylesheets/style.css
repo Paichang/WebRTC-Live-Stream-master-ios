@@ -1,0 +1,110 @@
+.WoJo{
+    position : absolute;
+    left : 640px;
+}
+
+
+body {
+  font-size : 14px;
+  font-family : "Comic Sans MS";
+}
+
+a {
+  color: #00b7ff;
+  text-decoration: none;
+}
+
+table, tr, td, th {margin: 0;border: 0;padding: 5px;border-collapse: collapse;}
+
+li {
+    list-style-type: none;
+    border: 2px solid black;
+    border-radius: 2px;
+    text-align: center;
+
+    padding: 5px 5px 5px 5px;
+}
+
+li:hover {
+  cursor: pointer;
+  background-color: #aaa;
+}
+
+.localStream {
+  display: inline-block;
+  top: 15px;
+  position : absolute;
+  left : 1160px;
+}
+
+.localStream video {
+    border: 1px solid rgb(119, 119, 119);
+    outline: 0px none;
+    height: 240px;
+    width: 320px; 
+}
+.localStream li {
+    list-style-type: none;
+    border: 2px solid black;
+    border-radius: 2px;
+    text-align: center;
+    padding: 5px 5px 5px 5px;   
+}
+
+.remoteStreams{
+    height:722px;
+    width:258px;
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  float: left;
+  text-align: center;
+}
+
+.remoteStreams td:hover {
+  cursor: pointer;
+  background-color: #aaa;
+}
+
+.remoteStreams .selected {
+  background-color: #444 !important;
+  text-shadow:none;
+  border-right-color: #aaa;
+  border-left: none;
+  border-radius: 3px 3px 3px 3px; 
+  box-shadow:inset 1px 2px 6px #070707;
+}
+.remotevideo{
+    border: 1px solid rgb(119, 119, 119);
+    outline: 0px none;
+    height: 600px;
+    width: 800px;   
+    position:absolute;
+	left : 340px;
+}
+.remotevideo video{
+    height: 600px;
+    width: 800px;   
+}
+.footer {
+   clear: both;
+}
+
+ .container {
+ 	font-size: 12px;
+ 	border-radius: 2px;
+ 	border: solid 1px #336699;
+ 	padding: 15px 15px 15px 15px;
+ 	line-height: 20px;
+ 	width: 320px;
+ }
+  .container form2{
+     width: 290px; 
+  }
+ .disabled {
+ 	color: gray;
+    width: 100px;
+ }
+ .enabled {
+ 	color: true;
+ }
