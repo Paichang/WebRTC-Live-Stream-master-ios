@@ -3,8 +3,8 @@ module.exports = function(app, streams) {
   // GET home 
   var index = function(req, res) {
     res.render('index', { 
-                          title: 'WoJo live', 
-                          header: 'WoJo live streaming',
+                          title: 'WoJo Live', 
+                          header: 'WoJo Live Streaming',
                           username: 'Username',
                           share: 'Share : ',
                           id: req.params.id

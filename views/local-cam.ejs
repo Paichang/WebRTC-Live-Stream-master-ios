@@ -1,79 +1,25 @@
-
-<div class="localStream" ng-controller="LocalStreamController as localStream">
-	<p><%= username %>: <input ng-model="localStream.name"/></p>
-	<div class="container">
-			<video id="localVideo"  muted="muted" autoplay="true"></video>
-		<li ng-click="localStream.toggleCam()">
-			<a href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
-		</li>
-		<div ng-show="localStream.cameraIsOn">		
-			<p><%= share %>:<a>{{ localStream.link }}</a></p>
-			
-		</div>
-		<textarea cols='42' rows='20' id='panel' readonly></textarea><br>
-		<form id='form1' name='form1'>
-			<label id='nicknamelabel' class='enabled'>Your Nickname: </label><input type='text' size='20' id='nickname'><input type='submit' value='send' id='sendnickname'>
-		</form>
-		<form id='form2' name='form2'>
-			<label id='msglabel' class='disabled'>Message: </label><input type='text' size='38' id='msg' disabled><input type='submit' value='send' id='send' disabled>
-		</form>
+<div ng-controller="LocalStreamController as localStream">
+	<div class="top">
+		<label class="none" id="greeting">Welcome! </label><span id="username"></span>
 	</div>
-	<script>
-	$(document).ready(function() {
-		var socket = io(); // need to change
-		var nickname = '';
-		$('#form1').submit(function(e) {
-			e.preventDefault();
-			console.log("you submitted a nickname!");			
-			socket.emit('setnickname', $('#nickname').val());
-			
-		});
-
-		socket.on('msg',function(m){
-			console.log(m);
-		})
-		
-		socket.on('nicknamesuccess', function(m) {
-			console.log("success!" + m);
-			nickname = m;
-			$('#nickname').prop('disabled', true);
-			$('#sendnickname').prop('disabled', true);
-			$('#msg').prop('disabled', false).focus();
-			$('#send').prop('disabled', false);
-			$('#msglabel').prop('className', 'enabled');
-		});
-		socket.on('nicknamefail', function(m) {
-			alert('Nickname conflict. Your nickname will be changed to "'+m+'"');
-			nickname = m;
-			$('#nickname').val(m);
-			$('#nickname').prop('disabled', true);
-			$('#sendnickname').prop('disabled', true);
-			$('#msg').prop('disabled', false).focus();
-			$('#send').prop('disabled', false);
-			$('#msglabel').prop('className', 'enabled');
-		});
-		$('#form2').submit(function(e) {
-			e.preventDefault();
-			var m = $('#msg').val();
-			socket.emit('post', {nickname: nickname, msg: m});
-			$('#msg').val('');
-			updateMsg({nickname:nickname,msg:m});
-		})
-		socket.on('msg', function(m) {
-			console.log('got msg',m);
-			updateMsg(m);
-		});
-		function updateMsg(msg) {
-			var ta = $("#panel");
-			var t = new Date();
-			var s = t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
-			var m = '[ ' + msg.nickname + ' (' + s + ')]: ' + msg.msg;
-			ta.val(ta.val()+'\n'+m);
-			setTimeout(function(){
-				ta.scrollTop(ta[0].scrollHeight - ta.innerHeight());
-			},10);
-		}
-		$('#msg').focus();
-	});
-	</script>
+	<div class="localStream">	
+		<div class="container">
+			<video id="localVideo"  muted="muted" autoplay="true"></video>
+			<li ng-click="localStream.toggleCam()" class="index-btn">
+				<a href>{{ localStream.cameraIsOn ? 'Stop' : 'Start' }}</a>
+			</li>
+			<textarea cols='42' rows='20' id='panel' readonly></textarea><br>
+			<form id='form2' name='form2'>
+				<input type='text' size='38' id='msg' placeholder="傳送訊息"><input type='submit' value='聊天' id='sendMsg'>
+			</form>
+		</div>
+	</div>
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>      
+			<p>請先輸入您的暱稱，好讓大家記住你!</p><input type="text" id="nickname">
+			<input type="submit" id="sendName" value="確認">
+		</div>
+	</div>
 </div>
+	

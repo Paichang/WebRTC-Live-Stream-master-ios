@@ -51,5 +51,11 @@ module.exports = function(io, streams) {
       console.log(m);
       client.broadcast.emit('msg', m);
     })
+
+//----------------------------------------------- donate
+    client.on('donate',function(detail){
+      console.log(detail);
+      client.broadcast.emit('MsgFromDonor',detail);
+    })
   });
 };

@@ -1,23 +1,44 @@
-
 <div class="remoteStreams" ng-controller="RemoteStreamsController as rtc">
-	<h2>Remote Streams</h2>
-    <div id="remoteVideosContainer" class="remotevideo"></div>
+	<div id="remoteVideosContainer" class="remotevideo">
+		<div id = "MsgFromDonor" class="hidden">
+			<span id="DonationDetail"></span><br>
+			<span id="DonorMsg"></span>
+		</div>
+	</div>
+	<input type="image" src="/images/donate.png" class="donate-btn" id="donate-btn" alt="donate">
+	<span id="popup">為你喜愛的實況主奉上一點心意</span>
+	<div id="donate-modal" class="modal">
+		<div class="modal-content" id="new">
+			<span class="close">&times;</span>
+			<li class="money-li">
+				<a href id="NT20"><img src="/images/money.png" class="money-btn" id="img20" ></a>
+			</li>
+			<li class="money-li">
+				<a href id="NT100"><img src="/images/more-money.png" class="money-btn" id="img100"></a>
+			</li>
+			<li class="money-li">
+				<a href id="NT300"><img src="/images/money-bag.png" class="money-btn" id="img300"></a>
+			</li><br><br>
+			你選擇了<span id="money"></span><br><br>
+			<input type="text" placeholder="你想告訴實況主的話" id="donateMsg">
+			<input type="submit" id="donateMoney" value="送出"><br><br>
+			<span id="error" style="color:red"></span>
+		</div>
+	</div>
 	<table>
     	<thead>
     		<tr>
-        		<th>Stream</th><th>1-way</th><th>2-way</th>
+        		<th>Streamer List</th>
    			</tr>
    		</thead>
     	<tbody>
     		<tr ng-repeat="stream in rtc.remoteStreams" ng-class="{'selected' : stream.isPlaying}">
-        		<td><a>{{stream.name}}</a></td>
-                <td ng-click="rtc.view(stream)"><a>View</a></td>
-                <td ng-click="rtc.call(stream)"><a>Call</a></td>
+        		<td ng-click="rtc.view(stream)"><a>{{stream.name}}</a></td>
     		</tr>
 		</tbody>
 	</table>
 
-	<li ng-click="rtc.loadData()" style="width: 240px">
+	<li ng-click="rtc.loadData()" style="width: 240px" class="index-btn">
         <a href>Refresh</a>
     </li>
 <div class="remoteStreams">

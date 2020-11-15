@@ -1,16 +1,16 @@
 (function(){
 	var app = angular.module('projectRtc', [],
 		function($locationProvider){$locationProvider.html5Mode(true);}
-    );
+	);
+	var socket = io();
 	var client = new PeerManager();
 	var mediaConfig = {
         audio:true,
         video: {
 			mandatory: {},
 			optional: []
-        }
+		}	
 	};
-	
 
     app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
     	var camera = {};
@@ -145,14 +145,22 @@
 					console.log(err);
 				});
 			} else {
-				camera.start()
-				.then(function(result) {
-					localStream.link = $window.location.host + '/' + client.getId();
-					client.send('readyToStream', { name: localStream.name });
-				})
-				.catch(function(err) {
-					console.log(err);
-				});
+				var username = $window.document.getElementById('username').innerHTML;
+				if(username == ''){
+					var Modal = $window.document.getElementById('myModal');
+					Modal.style.display = "block";
+				}
+				else{
+					localStream.name = username;
+					camera.start()
+					.then(function(result) {
+						localStream.link = $window.location.host + '/' + client.getId();
+						client.send('readyToStream', { name: localStream.name });
+					})
+					.catch(function(err) {
+						console.log(err);
+					});
+				}
 			}
 		};
 	}]);

@@ -1,8 +1,29 @@
-.WoJo{
-    position : absolute;
-    left : 640px;
+.logo{
+  display: inline;
+  width: 200px;
+  height: 100px;
+  margin-left: 25px;
 }
 
+.search-bar{
+  position : absolute;
+  width: 300px;
+  height: 32px;
+  left : 600px;
+  top: 30px;
+  font-size: 20px;
+  border: 2px solid black;
+  background-color: #D4D4D4; 
+}
+ 
+.search-btn{
+  position: absolute;
+  width: 36px;
+  height: 32px;
+  cursor: pointer;
+  left: 900px; 
+  top: 30px;
+}
 
 body {
   font-size : 14px;
@@ -14,9 +35,16 @@ a {
   text-decoration: none;
 }
 
-table, tr, td, th {margin: 0;border: 0;padding: 5px;border-collapse: collapse;}
+table, tr, td, th {
+  width : 250px;
+  margin: 0;
+  border: 0;
+  padding: 5px;
+  text-align: center;
+  border-collapse: collapse;
+}
 
-li {
+.index-btn {
     list-style-type: none;
     border: 2px solid black;
     border-radius: 2px;
@@ -25,14 +53,14 @@ li {
     padding: 5px 5px 5px 5px;
 }
 
-li:hover {
+.index-btn:hover {
   cursor: pointer;
   background-color: #aaa;
 }
 
 .localStream {
   display: inline-block;
-  top: 15px;
+  top: 100px; 
   position : absolute;
   left : 1160px;
 }
@@ -52,8 +80,8 @@ li:hover {
 }
 
 .remoteStreams{
-    height:722px;
-    width:258px;
+  height:722px;
+  width:258px;
   display: inline-block;
   top: 15px;
   right: 15px;
@@ -80,17 +108,92 @@ li:hover {
     height: 600px;
     width: 800px;   
     position:absolute;
-	left : 340px;
+    left : 340px;
+    top: 100px;
 }
 .remotevideo video{
     height: 600px;
     width: 800px;   
 }
+
+.donate-btn{
+  position: absolute;
+  right : 380px;
+  top: 710px;
+  width: 80px;
+  height: 80px;
+}
+
+#popup{
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  right : 320px;
+  top: 660px;
+}
+
+.money-li{
+  display: inline;
+  list-style-type: none;
+  margin-top: 10px;
+  margin-left:50px;
+  border-radius: 2px;
+  width: 100px;
+  height: 100px;
+}
+
+.money-btn{
+  width: 70px;
+  height: 70px;
+}
+
+#MsgFromDonor{
+  font-size: 25px; 
+  z-index: 1; 
+  position: absolute; 
+  top:35px;
+  left: 350px;
+  background-color: white;
+  color: black;
+}
+
+.hidden{
+  opacity: 0;
+} 
+
+.show{
+  animation-name:slide;
+  animation-duration:8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide{
+  0%{
+    opacity: 0;
+    left: 50px;
+  }
+  40%{
+    opacity: 1;
+    left: 350px;
+  }
+  70%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
 .footer {
    clear: both;
 }
 
- .container {
+.container {
  	font-size: 12px;
  	border-radius: 2px;
  	border: solid 1px #336699;
@@ -98,13 +201,83 @@ li:hover {
  	line-height: 20px;
  	width: 320px;
  }
-  .container form2{
+.container form2{
      width: 290px; 
-  }
+}
+
+ #msg{
+    height: 40px;
+    width: 320px;
+    background-color: white;
+ }
+
+ #sendMsg{
+   position: relative;
+   height: 35px;
+   top: 3px;
+   left: 285px;
+ }
  .disabled {
- 	color: gray;
+ 	  color: gray;
     width: 100px;
  }
  .enabled {
  	color: true;
  }
+ .none{
+   display : none;
+ }
+
+ .top{
+   position: absolute;
+   font-size: 20px;
+   text-align: center;
+   right: 10px;
+   top: 60px;
+ }
+
+
+
+ /*------------------------------------
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+#new{
+  width: 50%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
