@@ -16,12 +16,8 @@ $(document).ready(function() {
 	socket.on('nicknamefail', function(m) {
 		alert('Nickname conflict. Your nickname will be changed to "'+m+'"');
 		nickname = m;
-		$('#nickname').val(m);
-		$('#nickname').prop('disabled', true);
-		$('#sendnickname').prop('disabled', true);
-		$('#msg').prop('disabled', false).focus();
-		$('#send').prop('disabled', false);
-		$('#msglabel').prop('className', 'enabled');
+		$('#greeting').prop('className','enabled');
+		$('#username').text(m);
 	});
 
 	$('#form2').submit(function(e) {
@@ -76,14 +72,23 @@ $(document).ready(function() {
 //-------------------------------------------------------------------
     $('#sendName').click(function(){
 		var name = $('#nickname').val();
+		if(name.length <= 1){
+			$('#invalidName').text("請至少輸入2個字元的名稱");
+		}
+		else{
 		socket.emit('setnickname',name);
 		$('#myModal').css('display','none');
+		}
 	})
 
 	$('#nickname').keyup(function(e){
 		if(e.keyCode === 13){
 			$('#sendName').click();
 		}
+	})
+
+	$('#nickname').focus(function(e){
+		$('#invalidName').text("");
 	})
 
    	span_name.onclick = function() {

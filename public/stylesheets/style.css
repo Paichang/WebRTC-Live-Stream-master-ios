@@ -25,6 +25,14 @@
   top: 30px;
 }
 
+.top{
+  position: absolute;
+  display: inline;
+  font-size: 20px;
+  top: 60px;
+  left: 1300px; 
+  width:200px;
+}
 body {
   font-size : 14px;
   font-family : "Comic Sans MS";
@@ -36,7 +44,7 @@ a {
 }
 
 table, tr, td, th {
-  width : 250px;
+  width : 255px;
   margin: 0;
   border: 0;
   padding: 5px;
@@ -49,7 +57,6 @@ table, tr, td, th {
     border: 2px solid black;
     border-radius: 2px;
     text-align: center;
-
     padding: 5px 5px 5px 5px;
 }
 
@@ -79,6 +86,17 @@ table, tr, td, th {
     padding: 5px 5px 5px 5px;   
 }
 
+.container {
+  font-size: 12px;
+  border-radius: 2px;
+  border: solid 1px #336699;
+  padding: 15px 15px 15px 15px;
+  line-height: 20px;
+  width: 320px;
+}
+.container form2{
+    width: 290px; 
+}
 .remoteStreams{
   height:722px;
   width:258px;
@@ -118,8 +136,8 @@ table, tr, td, th {
 
 .donate-btn{
   position: absolute;
-  right : 380px;
-  top: 710px;
+  left : 1160px;
+  top: 820px;
   width: 80px;
   height: 80px;
 }
@@ -134,8 +152,8 @@ table, tr, td, th {
   padding: 10px 0;
   position: absolute;
   z-index: 1;
-  right : 320px;
-  top: 660px;
+  left : 1100px;
+  top: 770px;
 }
 
 .money-li{
@@ -159,8 +177,7 @@ table, tr, td, th {
   position: absolute; 
   top:35px;
   left: 350px;
-  background-color: white;
-  color: black;
+  color: white;
 }
 
 .hidden{
@@ -193,18 +210,6 @@ table, tr, td, th {
    clear: both;
 }
 
-.container {
- 	font-size: 12px;
- 	border-radius: 2px;
- 	border: solid 1px #336699;
- 	padding: 15px 15px 15px 15px;
- 	line-height: 20px;
- 	width: 320px;
- }
-.container form2{
-     width: 290px; 
-}
-
  #msg{
     height: 40px;
     width: 320px;
@@ -226,14 +231,6 @@ table, tr, td, th {
  }
  .none{
    display : none;
- }
-
- .top{
-   position: absolute;
-   font-size: 20px;
-   text-align: center;
-   right: 10px;
-   top: 60px;
  }
 
 
