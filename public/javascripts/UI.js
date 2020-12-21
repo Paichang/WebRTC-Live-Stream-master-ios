@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var span_name = document.getElementsByClassName("close")[0];
 	var span_donate = document.getElementsByClassName("close")[1];
 	var MsgFromDonor = document.getElementById('MsgFromDonor');
-	
+	var  count;
 	socket.on('nicknamesuccess', function(m) {
 		console.log("success!" + m);
 		nickname = m;
@@ -43,6 +43,8 @@ $(document).ready(function() {
 	socket.on('MsgFromDonor',function(detail){		
 		displayDonation(detail);
 	})
+   
+    
 
 	function updateMsg(msg) {
 		var ta = $("#panel");
@@ -139,6 +141,12 @@ $(document).ready(function() {
 	},function(){
 		$('#popup').css('visibility','hidden');
 	})
+    
+    $('#filter').hover(function(){
+		$('#popup_fliter').css('visibility','visible');
+	},function(){
+		$('#popup_fliter').css('visibility','hidden');
+	})
 
 	$('#NT20').click(function(){
 		$('.money-btn').css('border','0px');
@@ -177,4 +185,94 @@ $(document).ready(function() {
 			displayDonation({username : nickname, money : money, msg : donateMsg});
 		}
 	})
+    
+    //-------------------------------------------fliter
+        $('#filter').click(function(){
+            if(count<10){
+                count=count+1;
+            }
+            else{
+                count=0;
+            }
+            
+            switch(count){
+                case 0 :
+                    $('.VideosContainer').css('-webkit-filter','none');
+                break;
+                case 1 :
+                    $('.VideosContainer').css('-webkit-filter','blur(5px)');
+                break;
+                case 2 :
+                    $('.VideosContainer').css('-webkit-filter','grayscale(1)');
+                break;
+                case 3 :
+                    $('.VideosContainer').css('-webkit-filter','sepia(30)');
+                break;
+                case 4 :
+                    $('.VideosContainer').css('-webkit-filter','saturate(12)');
+                break;
+                case 5 :
+                    $('.VideosContainer').css('-webkit-filter','hue-rotate(90deg)');
+                break;
+                case 6 :
+                    $('.VideosContainer').css('-webkit-filter','invert(1)');
+                break;
+                case 7 :
+                    $('.VideosContainer').css('-webkit-filter','opacity(0.5)');
+                break;
+                case 8 :
+                    $('.VideosContainer').css('-webkit-filter','brightness(3)');
+                break;
+                case 9 :
+                    $('.VideosContainer').css('-webkit-filter','contrast(2)');
+                break;
+                case 10 :
+                    $('.VideosContainer').css('-webkit-filter','invert(0.5) saturate(12)');
+                break;
+                
+            }
+            socket.emit('filter_recive',count) 
+        })    
+        
+        socket.on('videofliter',function(change){
+            console.log(change);
+            switch(change){
+                case 0 :
+                    $('.remotevideo').css('-webkit-filter','none');
+                break;
+                case 1 :
+                    $('.remotevideo').css('-webkit-filter','blur(5px)');
+                break;
+                case 2 :
+                    $('.remotevideo').css('-webkit-filter','grayscale(1)');
+                break;
+                case 3 :
+                    $('.remotevideo').css('-webkit-filter','sepia(30)');
+                break;
+                case 4 :
+                    $('.remotevideo').css('-webkit-filter','saturate(12)');
+                break;
+                case 5 :
+                    $('.remotevideo').css('-webkit-filter','hue-rotate(90deg)');
+                break;
+                case 6 :
+                    $('.remotevideo').css('-webkit-filter','invert(1)');
+                break;
+                case 7 :
+                    $('.remotevideo').css('-webkit-filter','opacity(0.5)');
+                break;
+                case 8 :
+                    $('.remotevideo').css('-webkit-filter','brightness(3)');
+                break;
+                case 9 :
+                    $('.remotevideo').css('-webkit-filter','contrast(2)');
+                break;
+                case 10 :
+                    $('.remotevideo').css('-webkit-filter','invert(0.5),saturate(12)');
+                break;
+                
+            }
+
+        }) 
+
 });

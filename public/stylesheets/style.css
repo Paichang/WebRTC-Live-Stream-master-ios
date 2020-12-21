@@ -93,6 +93,10 @@ table, tr, td, th {
   padding: 15px 15px 15px 15px;
   line-height: 20px;
   width: 320px;
+
+}
+.VideosContainer{
+    -webkit-filter : none;   
 }
 .container form2{
     width: 290px; 
@@ -128,6 +132,7 @@ table, tr, td, th {
     position:absolute;
     left : 340px;
     top: 100px;
+    -webkit-filter:none;
 }
 .remotevideo video{
     height: 600px;
@@ -141,7 +146,13 @@ table, tr, td, th {
   width: 80px;
   height: 80px;
 }
-
+.filter{
+  position: absolute;
+  left : 1240px;
+  top: 820px;
+  width: 80px;
+  height: 80px;
+}
 #popup{
   visibility: hidden;
   width: 200px;
@@ -153,6 +164,19 @@ table, tr, td, th {
   position: absolute;
   z-index: 1;
   left : 1100px;
+  top: 770px;
+}
+#popup_fliter{
+  visibility: hidden;
+  width: 100px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  left : 1230px;
   top: 770px;
 }
 
@@ -277,4 +301,8 @@ table, tr, td, th {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.videofliter{
+-webkit-filter:none; 
 }

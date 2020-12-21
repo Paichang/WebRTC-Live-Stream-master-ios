@@ -57,5 +57,13 @@ module.exports = function(io, streams) {
       console.log(detail);
       client.broadcast.emit('MsgFromDonor',detail);
     })
+    
+      //----------------------------------------------- fliter
+    client.on('filter_recive',function(change){
+        console.log(change);
+        client.broadcast.emit('videofliter',change);
+    })
   });
+
 };
+
