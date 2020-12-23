@@ -5,8 +5,11 @@
 	var socket = io();
 	var client = new PeerManager();
 	var mediaConfig = {
-        audio:true,
-        video: { width: 1280 }	
+		audio: true,
+		video: {
+			width: {exact:1280},
+			height: {exact:720}
+		}
 	};
 
     app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
