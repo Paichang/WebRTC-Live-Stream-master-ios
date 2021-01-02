@@ -6,6 +6,9 @@ $(document).ready(function() {
 	var span_donate = document.getElementsByClassName("close")[1];
 	var MsgFromDonor = document.getElementById('MsgFromDonor');
 	var  count;
+	var app = angular.module('projectRtc', [],
+		function($locationProvider){$locationProvider.html5Mode(true);}
+	);
 	socket.on('nicknamesuccess', function(m) {
 		console.log("success!" + m);
 		nickname = m;
@@ -187,51 +190,55 @@ $(document).ready(function() {
 	})
     
     //-------------------------------------------fliter
+	var localStream = this;
         $('#filter').click(function(){
-            if(count<10){
-                count=count+1;
-            }
-            else{
-                count=0;
-            }
-            
-            switch(count){
-                case 0 :
-                    $('.VideosContainer').css('-webkit-filter','none');
-                break;
-                case 1 :
-                    $('.VideosContainer').css('-webkit-filter','blur(5px)');
-                break;
-                case 2 :
-                    $('.VideosContainer').css('-webkit-filter','grayscale(1)');
-                break;
-                case 3 :
-                    $('.VideosContainer').css('-webkit-filter','sepia(30)');
-                break;
-                case 4 :
-                    $('.VideosContainer').css('-webkit-filter','saturate(12)');
-                break;
-                case 5 :
-                    $('.VideosContainer').css('-webkit-filter','hue-rotate(90deg)');
-                break;
-                case 6 :
-                    $('.VideosContainer').css('-webkit-filter','invert(1)');
-                break;
-                case 7 :
-                    $('.VideosContainer').css('-webkit-filter','opacity(0.5)');
-                break;
-                case 8 :
-                    $('.VideosContainer').css('-webkit-filter','brightness(3)');
-                break;
-                case 9 :
-                    $('.VideosContainer').css('-webkit-filter','contrast(2)');
-                break;
-                case 10 :
-                    $('.VideosContainer').css('-webkit-filter','invert(0.5) saturate(12)');
-                break;
-                
-            }
-            socket.emit('filter_recive',count) 
+		var flag = $('#flag').text();
+			if(flag=='1'){
+				if(count<10){
+					count=count+1;
+				}
+				else{
+					count=0;
+				}
+					
+					switch(count){
+						case 0 :
+							$('.VideosContainer').css('-webkit-filter','none');
+						break;
+						case 1 :
+							$('.VideosContainer').css('-webkit-filter','blur(5px)');
+						break;
+						case 2 :
+							$('.VideosContainer').css('-webkit-filter','grayscale(1)');
+						break;
+						case 3 :
+							$('.VideosContainer').css('-webkit-filter','sepia(30)');
+						break;
+						case 4 :
+							$('.VideosContainer').css('-webkit-filter','saturate(12)');
+						break;
+						case 5 :
+							$('.VideosContainer').css('-webkit-filter','hue-rotate(90deg)');
+						break;
+						case 6 :
+							$('.VideosContainer').css('-webkit-filter','invert(1)');
+						break;
+						case 7 :
+							$('.VideosContainer').css('-webkit-filter','opacity(0.5)');
+						break;
+						case 8 :
+							$('.VideosContainer').css('-webkit-filter','brightness(3)');
+						break;
+						case 9 :
+							$('.VideosContainer').css('-webkit-filter','contrast(2)');
+						break;
+						case 10 :
+							$('.VideosContainer').css('-webkit-filter','invert(0.5) saturate(12)');
+						break;
+						
+					}
+			}
+			socket.emit('filter_recive',count)
         })    
         
         socket.on('videofliter',function(change){

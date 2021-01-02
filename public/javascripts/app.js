@@ -146,6 +146,7 @@
 				});
 			} else {
 				var username = $window.document.getElementById('username').innerHTML;
+				$window.document.getElementById('flag').innerHTML = "1";
 				if(username == ''){
 					var Modal = $window.document.getElementById('myModal');
 					Modal.style.display = "block";
@@ -160,7 +161,7 @@
 					.catch(function(err) {
 						console.log(err);
 					});
-				}
+				}				
 			}
 		};
 	}]);
