@@ -27,7 +27,13 @@
 	</div>
     
     <input type="image" src="/images/2.png" class="filter" id="filter" alt="filter">
-    <span id="popup_fliter">開始濾鏡吧~</span>
+	<span id="popup_fliter">開始濾鏡吧~</span>
+
+	<div ng-controller="LocalStreamController as localStream">
+	<input type="image" ng-click="localStream.Switch()" src="/images/screen.png" class="switch" id="switch"  disabled alt="switch button">
+	<span id="popup_sw">切換你的畫面</span>
+	</div>
+
     <div>
     </div>
 	<table>

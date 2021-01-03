@@ -4,28 +4,37 @@
 	);
 	var socket = io();
 	var client = new PeerManager();
-	var mediaConfig = {
+	var MediaConfig = {
 		audio: true,
 		video: {
 			width: {exact:1280},
 			height: {exact:720}
 		}
 	};
+	  var ScreenConfig = {
+		audio: true,
+		video: true
+	  };
+	  State = 0; // 0 : camera    1: screen
 
     app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
     	var camera = {};
-    	camera.preview = $window.document.getElementById('localVideo');
-
-    	camera.start = function(){
-			return requestUserMedia(mediaConfig)
+		camera.preview = $window.document.getElementById('localVideo');
+		
+    	camera.start = function(Config){
+			return requestUserMedia(Config,State) // get user stream
 			.then(function(stream){	
-				
-				camera.preview.setAttribute('autoplay', '');
+				camera.preview.setAttribute('autoplay', ''); 
 				camera.preview.setAttribute('muted', '');
 				camera.preview.setAttribute('playsinline', '');
 
-				attachMediaStream(camera.preview, stream);
-				client.setLocalStream(stream);
+				attachMediaStream(camera.preview, stream); // set LocalVideo.srcObject
+				if(State == 0){
+					client.setLocalStream(stream);
+				}
+				else{
+					client.setLocalScreen(stream);
+				}
 				camera.stream = stream;
 				$rootScope.$broadcast('cameraIsOn',true);
 			})
@@ -36,7 +45,8 @@
 				try {
 					//camera.stream.stop() no longer works
           for( var track in camera.stream.getTracks() ){
-            track.stop();
+			track.stop();
+			
           }
 					camera.preview.src = '';
 					resolve();
@@ -134,35 +144,51 @@
 		    });
 		});
 
-		localStream.toggleCam = function(){
-			if(localStream.cameraIsOn){
-				camera.stop()
-				.then(function(result){
-					client.send('leave');
-	    			client.setLocalStream(null);
+		localStream.Switch = function(){
+			if(State == 0){
+				State = 1;
+				$window.document.getElementById("switch").src = "/images/camera.png";
+				camera.start(ScreenConfig)
+				.then(function(result) {
+					client.UpdateLocalStream(State);
 				})
 				.catch(function(err) {
 					console.log(err);
 				});
-			} else {
-				var username = $window.document.getElementById('username').innerHTML;
-				$window.document.getElementById('flag').innerHTML = "1";
-				if(username == ''){
-					var Modal = $window.document.getElementById('myModal');
-					Modal.style.display = "block";
-				}
-				else{
-					localStream.name = username;
-					camera.start()
+			}
+			else{
+				State = 0;
+				$window.document.getElementById("switch").src = "/images/screen.png";
+				camera.start(MediaConfig)
 					.then(function(result) {
-						localStream.link = $window.location.host + '/' + client.getId();
-						client.send('readyToStream', { name: localStream.name });
+						client.UpdateLocalStream(State);
 					})
 					.catch(function(err) {
 						console.log(err);
 					});
-				}				
+				
 			}
+		}
+
+		localStream.toggleCam = function(){
+			var username = $window.document.getElementById('username').innerHTML;
+			$window.document.getElementById('flag').innerHTML = "1";
+			if(username == ''){
+				var Modal = $window.document.getElementById('myModal');
+				Modal.style.display = "block";
+			}
+			else{
+				$window.document.getElementById('switch').disabled = false;
+				localStream.name = username;
+				camera.start(MediaConfig)
+				.then(function(result) {
+					localStream.link = $window.location.host + '/' + client.getId();
+					client.send('readyToStream', { name: localStream.name });
+				})
+				.catch(function(err) {
+					console.log(err);
+				});
+			}							
 		};
 	}]);
 })();

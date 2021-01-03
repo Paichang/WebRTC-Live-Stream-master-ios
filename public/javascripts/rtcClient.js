@@ -15,6 +15,8 @@ var PeerManager = (function () {
       },
       peerDatabase = {},
       localStream,
+      localScreen,
+      curState=0,
       remoteVideoContainer = document.getElementById('remoteVideosContainer'),
       socket = io();
       
@@ -37,13 +39,15 @@ var PeerManager = (function () {
         console.log(event.candidate.candidate);
       }
     };
-    peer.pc.onaddstream = function(event) {
+    peer.pc.onaddstream = function(event) { // listen whether someone adds his video
       attachMediaStream(peer.remoteVideoEl, event.stream);
       remoteVideosContainer.appendChild(peer.remoteVideoEl);
+      console.log("onaddstream");
     };
-    peer.pc.onremovestream = function(event) {
+    peer.pc.onremovestream = function(event) { // listen whether someone removes his video 
       peer.remoteVideoEl.src = '';
       remoteVideosContainer.removeChild(peer.remoteVideoEl);
+      console.log("onremovestream");
     };
     peer.pc.oniceconnectionstatechange = function(event) {
       switch(
@@ -121,8 +125,13 @@ var PeerManager = (function () {
   }
 
   function toggleLocalStream(pc) {
-    if(localStream) {
-      (!!pc.getLocalStreams().length) ? pc.removeStream(localStream) : pc.addStream(localStream);
+    if(localStream){
+      if(curState == 0) {
+        (!!pc.getLocalStreams().length) ? pc.removeStream(localStream) : pc.addStream(localStream);
+      }
+      else{
+        (!!pc.getLocalStreams().length) ? pc.removeStream(localScreen) : pc.addStream(localScreen);
+      }
     }
   }
 
@@ -130,13 +139,14 @@ var PeerManager = (function () {
     console.log(err);
   }
 
+  
+
   return {
     getId: function() {
       return localId;
     },
     
     setLocalStream: function(stream) {
-
       // if local cam has been stopped, remove it from all outgoing streams.
       if(!stream) {
         for(id in peerDatabase) {
@@ -167,7 +177,33 @@ var PeerManager = (function () {
 
     send: function(type, payload) {
       socket.emit(type, payload);
+    },
+
+    // About shareScreen
+    setLocalScreen : function(stream){
+      localScreen = stream;
+    },
+
+    UpdateLocalStream : function(state){
+      curState = state;
+      for(id in peerDatabase) {
+        pc = peerDatabase[id].pc;
+        if(state == 0){        
+          pc.removeStream(localScreen);
+          offer(id);
+          pc.addStream(localStream);
+          offer(id);
+        }
+        else{
+          pc.removeStream(localStream);
+          offer(id);
+          pc.addStream(localScreen);
+          offer(id);
+        }
     }
+  }
+
+
   };
   
 });

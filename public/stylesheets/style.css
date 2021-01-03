@@ -153,6 +153,14 @@ table, tr, td, th {
   width: 80px;
   height: 80px;
 }
+.switch{
+  position: absolute;
+  left : 1320px;
+  top: 820px;
+  width: 80px;
+  height: 80px;
+}
+
 #popup{
   visibility: hidden;
   width: 200px;
@@ -177,6 +185,20 @@ table, tr, td, th {
   position: absolute;
   z-index: 1;
   left : 1230px;
+  top: 770px;
+}
+
+#popup_sw{
+  visibility: hidden;
+  width: 100px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  left : 1350px;
   top: 770px;
 }
 

@@ -225,7 +225,7 @@ attachMediaStream = function(element, stream) {
 };
 
 // Returns the result of getUserMedia as a Promise.
-function requestUserMedia(constraints) {
+function requestUserMedia(constraints,flag) {
   return new Promise(function(resolve, reject) {
     var onSuccess = function(stream) {
       resolve(stream);
@@ -235,7 +235,12 @@ function requestUserMedia(constraints) {
     };
 
     try {
-      navigator.mediaDevices.getUserMedia(constraints).then(onSuccess).catch(onError);
+      if(flag == 0){
+        navigator.mediaDevices.getUserMedia(constraints).then(onSuccess).catch(onError);
+      }
+      else{
+        navigator.mediaDevices.getDisplayMedia(constraints).then(onSuccess).catch(onError);
+      }    
     } catch (e) {
       reject(e);
     }
