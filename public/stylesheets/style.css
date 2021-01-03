@@ -174,7 +174,7 @@ table, tr, td, th {
   left : 1100px;
   top: 770px;
 }
-#popup_fliter{
+.popup_fliter{
   visibility: hidden;
   width: 100px;
   background-color: #555;
@@ -188,7 +188,7 @@ table, tr, td, th {
   top: 770px;
 }
 
-#popup_sw{
+.popup_sw{
   visibility: hidden;
   width: 100px;
   background-color: #555;
@@ -198,7 +198,7 @@ table, tr, td, th {
   padding: 10px 0;
   position: absolute;
   z-index: 1;
-  left : 1350px;
+  left : 1310px;
   top: 770px;
 }
 

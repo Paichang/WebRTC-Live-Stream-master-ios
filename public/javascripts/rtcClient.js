@@ -213,4 +213,5 @@ var Peer = function (pcConfig, pcConstraints) {
   this.remoteVideoEl = document.createElement('video');
   this.remoteVideoEl.controls = true;
   this.remoteVideoEl.autoplay = true;
+  this.remoteVideoEl.style
 }

@@ -236,6 +236,7 @@ function requestUserMedia(constraints,flag) {
 
     try {
       if(flag == 0){
+        console.log("request usermedia!");
         navigator.mediaDevices.getUserMedia(constraints).then(onSuccess).catch(onError);
       }
       else{

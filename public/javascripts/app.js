@@ -23,7 +23,7 @@
 		
     	camera.start = function(Config){
 			return requestUserMedia(Config,State) // get user stream
-			.then(function(stream){	
+			.then(function(stream){
 				camera.preview.setAttribute('autoplay', ''); 
 				camera.preview.setAttribute('muted', '');
 				camera.preview.setAttribute('playsinline', '');
@@ -179,6 +179,11 @@
 			}
 			else{
 				$window.document.getElementById('switch').disabled = false;
+				$window.document.getElementById('filter').disabled = false;
+				$window.document.getElementById('popup_filter').className = "popup_fliter";
+				$window.document.getElementById('popup_filter').innerHTML = "開始濾鏡吧~";
+				$window.document.getElementById('popup_sw').className = "popup_sw";
+				$window.document.getElementById('popup_sw').innerHTML = "切換你的畫面";
 				localStream.name = username;
 				camera.start(MediaConfig)
 				.then(function(result) {

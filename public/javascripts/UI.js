@@ -146,9 +146,15 @@ $(document).ready(function() {
 	})
     
     $('#filter').hover(function(){
-		$('#popup_fliter').css('visibility','visible');
+		$('.popup_fliter').css('visibility','visible');
 	},function(){
-		$('#popup_fliter').css('visibility','hidden');
+		$('.popup_fliter').css('visibility','hidden');
+	})
+
+	$('#switch').hover(function(){
+		$('.popup_sw').css('visibility','visible');
+	},function(){
+		$('.popup_sw').css('visibility','hidden');
 	})
 
 	$('#NT20').click(function(){
